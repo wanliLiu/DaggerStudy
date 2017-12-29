@@ -1,10 +1,14 @@
-package com.soli.taihe.dagger2;
+package com.soli.taihe.dagger2.ui;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.soli.taihe.dagger2.MainComponent;
+import com.soli.taihe.dagger2.Poetry;
+import com.soli.taihe.dagger2.R;
 
 import javax.inject.Inject;
 
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 使用Dagger2生成的类 生成组件进行构造，并注入
-        DaggerMainComponent.create().inject(this);
+        MainComponent.getInstance().inject(this);
 
         initView();
     }
@@ -31,5 +35,7 @@ public class MainActivity extends AppCompatActivity {
         TextView view = findViewById(R.id.tv_poetry);
         String json = mGson.toJson(mPoetry);
         view.setText(json);
+
+        findViewById(R.id.button).setOnClickListener(view1 -> startActivity(new Intent(this, OtherActivity.class)));
     }
 }

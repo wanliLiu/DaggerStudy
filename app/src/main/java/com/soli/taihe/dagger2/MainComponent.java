@@ -1,5 +1,8 @@
 package com.soli.taihe.dagger2;
 
+import com.soli.taihe.dagger2.ui.MainActivity;
+import com.soli.taihe.dagger2.ui.OtherActivity;
+
 import dagger.Component;
 
 /**
@@ -11,7 +14,7 @@ import dagger.Component;
  */
 //这里表示Component会从MainModule类中拿那些用@Provides注解的方法来生成需要注入的实例
 @Component(modules = {MainModule.class, PoetryModule.class})
-public interface MainComponent {
+public abstract class MainComponent {
 
     /**
      * 需要用到这个连接器的对象，就是这个对象里面有需要注入的属性
@@ -19,5 +22,19 @@ public interface MainComponent {
      * 这里inject表示注入的意思，这个方法名可以随意更改，但建议就
      * 用inject即可。
      */
-    void inject(MainActivity activity);
+    public abstract void inject(MainActivity activity);
+
+    public abstract void inject(OtherActivity activity);
+
+    private static MainComponent component;
+
+    /**
+     * @return
+     */
+    public static MainComponent getInstance() {
+        if (component == null)
+            component = DaggerMainComponent.create();
+
+        return component;
+    }
 }
