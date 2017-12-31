@@ -1,4 +1,4 @@
-package com.soli.taihe.dagger2;
+package com.soli.taihe.dagger2.module;
 
 import com.google.gson.Gson;
 

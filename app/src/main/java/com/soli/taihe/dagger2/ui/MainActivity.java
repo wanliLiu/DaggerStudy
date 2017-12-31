@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.soli.taihe.dagger2.MainComponent;
+import com.soli.taihe.dagger2.component.MainComponent;
 import com.soli.taihe.dagger2.Poetry;
 import com.soli.taihe.dagger2.R;
 

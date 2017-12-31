@@ -1,4 +1,7 @@
-package com.soli.taihe.dagger2;
+package com.soli.taihe.dagger2.module;
+
+import com.soli.taihe.dagger2.Poetry;
+import com.soli.taihe.dagger2.scope.PoetryScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,6 +15,7 @@ public class PoetryModule {
 
     // 这个方法需要一个String参数，在Dagger2注入中，这些参数也是注入形式的，也就是
     // 要有其他对方提供参数poems的生成，不然会造成编译出错
+    @PoetryScope
     @Provides
     public Poetry providePoetry(String poems) {
         return new Poetry(poems);

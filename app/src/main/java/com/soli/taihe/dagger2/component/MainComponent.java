@@ -1,6 +1,9 @@
-package com.soli.taihe.dagger2;
+package com.soli.taihe.dagger2.component;
 
+import com.soli.taihe.dagger2.scope.PoetryScope;
+import com.soli.taihe.dagger2.module.PoetryModule;
 import com.soli.taihe.dagger2.ui.MainActivity;
+import com.soli.taihe.dagger2.ui.MainApplication;
 import com.soli.taihe.dagger2.ui.OtherActivity;
 
 import dagger.Component;
@@ -13,7 +16,8 @@ import dagger.Component;
  * @Time 2017/12/29
  */
 //这里表示Component会从MainModule类中拿那些用@Provides注解的方法来生成需要注入的实例
-@Component(modules = {MainModule.class, PoetryModule.class})
+@PoetryScope
+@Component(dependencies = ApplicationComponent.class, modules = {PoetryModule.class})
 public abstract class MainComponent {
 
     /**
@@ -33,7 +37,9 @@ public abstract class MainComponent {
      */
     public static MainComponent getInstance() {
         if (component == null)
-            component = DaggerMainComponent.create();
+            component = DaggerMainComponent.builder()
+                    .applicationComponent(MainApplication.getInstance().getApplicationComponent())
+                    .build();
 
         return component;
     }
